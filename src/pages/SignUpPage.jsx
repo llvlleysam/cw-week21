@@ -1,22 +1,34 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { login, signup } from "../Redux/Courses.slice/Courses.slice";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button } from "@mui/material";
+
 export default function SignUpPage() {
+    const dispatch = useDispatch()
+    function handelSubmitLogin(e){
+        e.preventDefault()
+        const phone = e.target["phone"].value
+        const password = e.target["password"].value
+        const newUser = {phone,password}
+        dispatch(signup(newUser))
+        console.log(newUser);
+        
+    }
+
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
-      <h1 className="text-3xl">LOGIN</h1>
-      <form className="bg-gray-300 flex flex-col p-8 gap-8" action="">
-        <label className="flex flex-col" htmlFor="">
-          <span>Phone Number :</span>
-          <input className="py-2 rounded-lg" id="phone" type="text" />
-        </label>
-        <label className="flex flex-col" htmlFor="">
-          <span>Password :</span>
-          <input className="py-2 rounded-lg" id="password" type="password" />
-        </label>
-        <input
-          className="bg-slate-100 rounded-lg py-2"
-          type="submit"
-          value={"Login"}
-        />
+      <h1 className="text-3xl">SIGN UP</h1>
+      <form onSubmit={handelSubmitLogin} className="bg-gray-300 flex flex-col p-8 gap-8" action="">
+          <TextField className="bg-white rounded-md" id="phone" label="Phone Number" variant="outlined" />
+          <TextField className="bg-white rounded-md" id="password" label="Password" variant="outlined" />
+        <Button type="submit" variant="contained">Sign up</Button>
       </form>
     </div>
   );
 }
+
+
+

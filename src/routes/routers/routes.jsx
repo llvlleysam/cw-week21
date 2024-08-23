@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { ADDconfig } from "../config/ADDconfig";
 import CoursesPage from "../../pages/CoursesPage";
 import LoginPage from "../../pages/LoginPage";
-// import SignUpPage from "../../pages/signUpPage";
+import SignUpPage from "../../pages/signUpPage";
 
 
 
@@ -17,6 +17,6 @@ export const routes = createBrowserRouter([
     },
     {
         path:ADDconfig.SignUp,
-        // element:<SignUpPage/>
+        element:<SignUpPage/>
     }
 ])

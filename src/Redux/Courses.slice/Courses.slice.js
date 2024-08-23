@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import httpService from "../../Servies/BaseService"
-import {  loginURL, refreshURL } from "../../Constant/BaseUrl"
+import {  loginURL, refreshURL, signupURL } from "../../Constant/BaseUrl"
 
 
 
@@ -10,7 +10,8 @@ const initialState = {
     refresh:{},
     courses:[],
     loading: false,
-    error: ""
+    error: "",
+    signup:[]
 }
 
     export const coursesGet = createAsyncThunk("courses/get_courses",async ()=>{
@@ -35,12 +36,22 @@ const initialState = {
     export const refreshToken = createAsyncThunk("courses/refresh",async(refresh)=>{
         try{
             const response = await httpService.post(refreshURL,{refresh})
-             console.log(response)
+            console.log(response)
             return response 
         }catch (e){
             console.log(e.message)
         }
     })
+    export const signup = createAsyncThunk("courses/signup",async(user)=>{
+        try{
+            const response = await httpService.post(signupURL,user)
+            // console.log(response)
+            return response.data 
+        }catch (e){
+            console.log(e.message)
+        }
+    })
+
 
 const CoursesSlice = createSlice({
     name:"courses",
@@ -70,6 +81,9 @@ const CoursesSlice = createSlice({
                 state.refresh = action.payload
                 // localStorage.setItem("access",action.payload.access)
                 localStorage.setItem("access",action.payload.data.access)
+            })
+            .addCase(signup.fulfilled,(state,action)=>{
+                state.signup=action.payload
             })
     }
 })
