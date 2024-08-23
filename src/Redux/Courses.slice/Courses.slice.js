@@ -1,6 +1,6 @@
-import { asyncThunkCreator, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import {createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import httpService from "../../Servies/BaseService"
-import { getURL, loginURL, refreshURL } from "../../Constant/BaseUrl"
+import {  loginURL, refreshURL } from "../../Constant/BaseUrl"
 
 
 

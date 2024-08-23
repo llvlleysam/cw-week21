@@ -22,17 +22,17 @@ httpService.interceptors.request.use((req)=>{
 })
 
 httpService.interceptors.response.use((response)=>response, async(error)=>{
-    if(error.response.status != 401){
+    if(error.response.status !== 401){
         return Promise.reject(error)
     }
     const originRequest = error.config
     const refreshT = localStorage.getItem("refresh")
-    if(error.response.status == 401 && originRequest){
+    if(error.response.status === 401 && originRequest){
         try{
             console.log("call")
             await store.dispatch(refreshToken(refreshT))
                 const response = await httpService.request(originRequest)
-                
+
                 return Promise.resolve(response)
         } catch (e){
             localStorage.removeItem("access")
